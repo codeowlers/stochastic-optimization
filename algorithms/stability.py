@@ -57,10 +57,10 @@ def KMCC_outsample_stability(n, p, weight_mean, weight_stddev, capacity_mean, ca
         # Split data into training and validation sets
         nodes_train, weights_train, nodes_val, weights_val = split_data(nodes, weights)
         # Solve the clustering model on the training set
-        clusters_train, kmcc_time = kmcc_clustering(nodes_train, capacities, weights_train)
+        clusters_train, kmcc_time, _ = kmcc_clustering(nodes_train, capacities, weights_train)
 
         # Solve the clustering model on the validation set
-        clusters_val, kmcc_time = kmcc_clustering(nodes_val, capacities, weights_val)
+        clusters_val, kmcc_time, _ = kmcc_clustering(nodes_val, capacities, weights_val)
         
         # Calculate the Rand index score between the training and validation clusters
         rand_index_scores.append(rand_index(clusters_train, clusters_val))
