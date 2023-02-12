@@ -45,11 +45,11 @@ def rand_index(clusters_1, clusters_2):
             if np.array_equal(clusters_1[i], clusters_1[j]) and np.array_equal(clusters_2[i], clusters_2[j]):
                 tp += 1
             # If both data points are in different clusters in both sets of clusters, increment tn
-            elif clusters_1[i] != clusters_1[j] and clusters_2[i] != clusters_2[j]:
+            elif np.all(clusters_1[i] != clusters_1[j]) and np.all(clusters_2[i] != clusters_2[j]):
                 tn += 1
             # If the data points are in the same cluster in one set of clusters and different clusters in the other,
             # increment fp
-            elif clusters_1[i] == clusters_1[j] and clusters_2[i] != clusters_2[j]:
+            elif np.array_equal(clusters_1[i], clusters_1[j]) and np.all(clusters_2[i] != clusters_2[j]):
                 fp += 1
             # If the data points are in different clusters in one set of clusters and the same cluster in the other,
             # increment fn
