@@ -15,6 +15,16 @@ def insample_stability(clusters_reference, nodes, capacities, weights, lambda_pa
     # Return the average Jaccard similarity
     return np.mean(jaccard_scores)
 
+def KMCC_insample_stability(clusters_reference, nodes, capacities, weights, num_runs=100):
+    jaccard_scores = []
+    for i in range(num_runs):
+        # Run the clustering algorithm `num_runs` times
+        clusters, kmcc_time = kmcc_clustering(nodes, capacities, weights)
+        # Compute the Jaccard similarity between the obtained clusters and the reference clusters
+        jaccard_scores.append(jaccard_similarity(clusters, clusters_reference))
+    # Return the average Jaccard similarity
+    return np.mean(jaccard_scores)
+
 
 def outsample_stability(n, p, weight_mean, weight_stddev, capacity_mean, capacity_stddev, lambda_param, num_runs=10):
     rand_index_scores = []
@@ -34,6 +44,29 @@ def outsample_stability(n, p, weight_mean, weight_stddev, capacity_mean, capacit
         rand_index_scores.append(rand_index(clusters_train, clusters_val))
     # Return the average Rand index score
     return np.mean(rand_index_scores)
+
+
+def KMCC_outsample_stability(n, p, weight_mean, weight_stddev, capacity_mean, capacity_stddev, num_runs=10):
+    rand_index_scores = []
+
+    for i in range(num_runs):
+        # Generate instances of nodes and capacities
+        nodes, capacities = generate_instances(n, p, capacity_mean, capacity_stddev)
+        # Generate weights for each node
+        weights = generate_weights(n, weight_mean, weight_stddev)
+        # Split data into training and validation sets
+        nodes_train, weights_train, nodes_val, weights_val = split_data(nodes, weights)
+        # Solve the clustering model on the training set
+        clusters_train, kmcc_time = kmcc_clustering(nodes_train, capacities, weights_train)
+
+        # Solve the clustering model on the validation set
+        clusters_val, kmcc_time = kmcc_clustering(nodes_val, capacities, weights_val)
+        
+        # Calculate the Rand index score between the training and validation clusters
+        rand_index_scores.append(rand_index(clusters_train, clusters_val))
+    # Return the average Rand index score
+    return np.mean(rand_index_scores)
+
 
 
 def calculate_VSS(n, p, capacity_mean, capacity_stddev, weight_mean, weight_stddev, lambda_param, num_simulations):

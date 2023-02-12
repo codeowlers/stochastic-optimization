@@ -42,7 +42,7 @@ def rand_index(clusters_1, clusters_2):
     for i in range(n):
         for j in range(i + 1, n):
             # If both data points are in the same cluster in both sets of clusters, increment tp
-            if clusters_1[i] == clusters_1[j] and clusters_2[i] == clusters_2[j]:
+            if np.array_equal(clusters_1[i], clusters_1[j]) and np.array_equal(clusters_2[i], clusters_2[j]):
                 tp += 1
             # If both data points are in different clusters in both sets of clusters, increment tn
             elif clusters_1[i] != clusters_1[j] and clusters_2[i] != clusters_2[j]:
