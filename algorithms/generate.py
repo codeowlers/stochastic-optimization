@@ -1,5 +1,6 @@
 import numpy as np
 
+
 # Generate Random Instances using capacity mean and standard deviation
 def generate_instances(n, p, capacity_mean, capacity_stddev):
     # Generate 2D positions for n nodes
@@ -7,6 +8,7 @@ def generate_instances(n, p, capacity_mean, capacity_stddev):
     # Generate capacities for clusters
     capacities = np.random.normal(capacity_mean, capacity_stddev, p)
     return nodes, capacities
+
 
 # Generate Random Weights using weight mean and standard deviation
 def generate_weights(n, weight_mean, weight_stddev):
