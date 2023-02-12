@@ -1,3 +1,4 @@
 numpy
 gurobipy
 jupyter
+matplotlib
