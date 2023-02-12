@@ -9,7 +9,7 @@ def get_cluster_nodes(clusters, nodes):
     return cluster_nodes
 
 
-def plot_clusters(clusters, nodes):
+def plot_clusters(clusters, nodes, title):
     def random_color():
         return [random.random() for _ in range(3)]
 
@@ -20,8 +20,6 @@ def plot_clusters(clusters, nodes):
         x = [point[0] for point in cluster]
         y = [point[1] for point in cluster]
         plt.scatter(x, y, c=[colors[i]])
-
-    plt.xlabel('X axis')
-    plt.ylabel('Y axis')
+    plt.title(title)
     plt.show()
 
