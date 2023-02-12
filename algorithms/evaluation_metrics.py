@@ -3,8 +3,14 @@ import numpy as np
 def jaccard_similarity(clusters_1, clusters_2):
     jaccard_scores = []
     for cluster_1 in clusters_1:
+        # Check if cluster 1 is empty to avoid errors
+        if len(cluster_1) == 0:
+            continue
         jaccard_scores_per_cluster = []
         for cluster_2 in clusters_2:
+            # Check if cluster 2 is empty to avoid errors
+            if len(cluster_2) == 0:
+                continue
             union = len(set(cluster_1).union(cluster_2))
             intersection = len(set(cluster_1).intersection(cluster_2))
             jaccard_index = intersection / union
