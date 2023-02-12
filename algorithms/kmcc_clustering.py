@@ -39,7 +39,6 @@ def kmcc_clustering(nodes, capacities, weights):
     result = []
     for i in range(p):
         result.append(np.where(clusters == i)[0])
-
     # Calculate the within-cluster sum of squares (WCSS) 
     wcss = 0.0
     for i in range(n):

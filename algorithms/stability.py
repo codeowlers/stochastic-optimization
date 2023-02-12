@@ -93,6 +93,6 @@ def calculate_VSS(n, p, capacity_mean, capacity_stddev, weight_mean, weight_stdd
     print('EEVS:', EEVS)
 
     # Calculate the VSS
-    VSS = EEVS - RP
+    VSS = RP - EEVS
 
     return VSS
