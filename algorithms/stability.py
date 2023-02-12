@@ -19,7 +19,7 @@ def KMCC_insample_stability(clusters_reference, nodes, capacities, weights, num_
     jaccard_scores = []
     for i in range(num_runs):
         # Run the clustering algorithm `num_runs` times
-        clusters, kmcc_time = kmcc_clustering(nodes, capacities, weights)
+        clusters, kmcc_time, _ = kmcc_clustering(nodes, capacities, weights)
         # Compute the Jaccard similarity between the obtained clusters and the reference clusters
         jaccard_scores.append(jaccard_similarity(clusters, clusters_reference))
     # Return the average Jaccard similarity
